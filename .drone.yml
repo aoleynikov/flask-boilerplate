@@ -2,7 +2,6 @@ pipeline:
   build:
     image: veldrin/build:latest
     commands:
-      - touch .env
-      - make pull_secrets ENV=test
-      - make use_secrets ENV=test
+      - aws s3 cp s3://storytelling-secrets/$(APP_NAME)/$(ENV)/.env ./secrets/$(ENV)/.env
+      - cp ./secrets/$(ENV)/.env .
       - make build
