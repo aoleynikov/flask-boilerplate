@@ -1,5 +1,5 @@
 pipeline:
   build:
-    image: golang:latest
+    image: veldrin/build:latest
     commands:
       - make build
