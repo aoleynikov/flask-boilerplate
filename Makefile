@@ -3,12 +3,10 @@
 include .env
 
 build_image_for_drone:
-	cp ~/.aws/config .
-	cp ~/.aws/credentials .
+	cp ~/.aws/config . && cp ~/.aws/credentials .
 	docker build --rm -f "build.Dockerfile" -t veldrin/build:latest .
 	docker push veldrin/build:latest
-	rm config
-	rm credentials
+	rm config && rm credentials
 
 run:
 	docker-compose up
