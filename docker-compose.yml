@@ -1,0 +1,27 @@
+version: '3'
+services:
+  web:
+    build: 
+      context: .
+      args:
+        - SECRET
+    image: storytelling-example:latest
+    container_name: web
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - queue
+  db:
+    image: mongo:latest
+    container_name: db
+    volumes:
+      - ./data/mongo:/data/db
+    ports: 
+      - "27017:27017"
+  queue:
+    container_name: queue
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    image: rabbitmq:latest
