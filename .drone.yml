@@ -2,4 +2,6 @@ pipeline:
   build:
     image: veldrin/build:latest
     commands:
+      - make pull_secrets ENV=test
+      - make use_secrets ENV=test
       - make build

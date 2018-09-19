@@ -35,6 +35,9 @@ pull_secrets:
 push_secrets:
 	aws s3 cp ./secrets/$(ENV)/.env s3://storytelling-secrets/$(APP_NAME)/$(ENV)/.env
 
+use_secrets:
+	cp ./secrets/$(ENV)/.env .
+
 VERSION=latest
 
 tag:
