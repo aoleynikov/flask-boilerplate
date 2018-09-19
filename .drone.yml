@@ -2,6 +2,7 @@ pipeline:
   build:
     image: veldrin/build:latest
     commands:
+      - echo $AWS_ACCESS_KEY_ID
       - aws s3 cp s3://storytelling-secrets/example/dev/.env ./secrets/dev/.env
       - cp ./secrets/dev/.env .
       - make build
