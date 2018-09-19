@@ -1,7 +1,5 @@
 pipeline:
   build:
+    image: golang:latest
     commands:
       - make build
-  test:
-    commands:
-      - make test
