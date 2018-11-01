@@ -1,17 +1,8 @@
-stage('Look around') {
-  node {
-    sh 'ls -la'
+pipeline {
+  stages {
+    stage('Checkout') {
+      checkout scm
+      sh 'ls -la'
+    }
   }
-}
-stage('Checkout') {
-
-}
-stage('Build') {
-
-}
-stage('Test') {
-
-}
-stage('Push image') {
-
 }
