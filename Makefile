@@ -32,7 +32,7 @@ use_secrets:
 VERSION=latest
 
 tag:
-	docker tag storytelling-example:$(VERSION) 877366825671.dkr.ecr.us-east-2.amazonaws.com/storytelling-example:$(VERSION)
+	docker tag storytelling-example:latest 877366825671.dkr.ecr.us-east-2.amazonaws.com/storytelling-example:$(VERSION)
 
 push:
 	docker push 877366825671.dkr.ecr.us-east-2.amazonaws.com/storytelling-example:$(VERSION)
