@@ -1,5 +1,5 @@
 stage('Look around') {
-
+  sh 'ls -la'
 }
 stage('Checkout') {
 
@@ -11,5 +11,5 @@ stage('Test') {
 
 }
 stage('Push image') {
-  
+
 }
