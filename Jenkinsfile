@@ -31,4 +31,10 @@ pipeline {
       }
     }
   }
+  post {
+    always {
+      sh 'rm -rf ./**/*'
+      sh 'docker rmi $(docker images -q)'
+    }
+  }
 }
