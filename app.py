@@ -12,7 +12,7 @@ def health():
 
 @app.route('/secret')
 def secret():
-    return os.getenv('SECRET', 'a cake is real')
+    return os.getenv('SECRET', 'it didn\'t work')
 
 
 if __name__ == '__main__':
