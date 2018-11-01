@@ -33,7 +33,8 @@ pipeline {
   }
   post {
     always {
-      sh 'rm -rf ./**/*'
+      sh 'make stop'
+      cleanWs()
       sh 'docker rmi $(docker images -q)'
     }
   }
