@@ -1,8 +1,11 @@
 pipeline {
+  agent any
   stages {
     stage('Checkout') {
-      checkout scm
-      sh 'ls -la'
+      steps {
+        checkout scm
+        sh 'ls -la'
+      }
     }
   }
 }
