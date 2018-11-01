@@ -1,5 +1,7 @@
 stage('Look around') {
-  sh 'ls -la'
+  node {
+    sh 'ls -la'
+  }
 }
 stage('Checkout') {
 
