@@ -17,7 +17,7 @@ stop:
 
 test:
 	docker-compose up -d
-	docker-compose exec web pytest 
+	docker-compose exec -T web pytest 
 	docker-compose down
 
 pull_secrets:
