@@ -2,6 +2,8 @@
 
 include .env
 
+APP_NAME=example
+
 run:
 	docker-compose up
 
@@ -14,12 +16,9 @@ stop:
 	docker-compose down
 
 test:
-	docker-compose build
 	docker-compose up -d
 	docker-compose exec web pytest 
 	docker-compose down
-
-APP_NAME=example
 
 pull_secrets:
 	aws s3 cp s3://storytelling-secrets/$(APP_NAME)/$(ENV)/.env ./secrets/$(ENV)/.env
