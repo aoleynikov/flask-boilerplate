@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh "make pull_secrets ENV=${params.ENV}"
         sh "make use_secrets ENV=${params.ENV}"
-        sh "make build VERSION=${env.BUILD_NUMBER}"
+        sh "make build VERSION=${'build_' + env.BUILD_NUMBER}"
       }
     }
     stage('Test') {
@@ -21,8 +21,8 @@ pipeline {
     }
     stage('Push image') {
       steps {
-        sh "make tag VERSION=${env.BUILD_NUMBER}"
-        sh "make push VERSION=${env.BUILD_NUMBER}"
+        sh "make tag VERSION=${'build_' + env.BUILD_NUMBER}"
+        sh "make push VERSION=${'build_' + env.BUILD_NUMBER}"
       }
     }
     stage('Deploy') {
@@ -35,7 +35,7 @@ pipeline {
     always {
       sh 'make stop'
       cleanWs()
-      sh 'docker rmi $(docker images -q)'
+      sh 'docker rmi $(docker images -qa)'
     }
   }
 }
