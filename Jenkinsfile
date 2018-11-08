@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Push image') {
       steps {
-        sh "$(aws ecr get-login --no-include-email --region us-east-1)"
+        sh "\$(aws ecr get-login --no-include-email --region us-east-1)"
         sh "make tag VERSION=${'build_' + env.BUILD_NUMBER}"
         sh "make push VERSION=${'build_' + env.BUILD_NUMBER}"
       }
