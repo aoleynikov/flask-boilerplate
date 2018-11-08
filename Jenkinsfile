@@ -36,7 +36,7 @@ pipeline {
     always {
       sh 'make stop'
       cleanWs()
-      sh 'docker rmi $(docker images -qa)'
+      sh 'docker rmi --force $(docker images -qa)'
     }
   }
 }
