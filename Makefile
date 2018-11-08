@@ -35,7 +35,9 @@ tag:
 	docker tag storytelling-example:latest 877366825671.dkr.ecr.us-east-1.amazonaws.com/storytelling-example:$(VERSION)
 
 push:
+	$(aws ecr get-login --no-include-email --region us-east-1)
 	docker push 877366825671.dkr.ecr.us-east-1.amazonaws.com/storytelling-example:$(VERSION)
 
 pull:
+	$(aws ecr get-login --no-include-email --region us-east-1)
 	docker pull 877366825671.dkr.ecr.us-east-1.amazonaws.com/storytelling-example:$(VERSION)
