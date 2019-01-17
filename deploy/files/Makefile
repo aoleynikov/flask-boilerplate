@@ -34,19 +34,16 @@ use_secrets:
 
 VERSION=latest
 IMAGE_NAME=storytelling-example
-ECS_REPO_URL=877366825671.dkr.ecr.us-east-1.amazonaws.com/$(IMAGE_NAME)
-
-echo_image:
-	echo $(ECS_REPO_URL)
+IMAGE=$(APP_NAME):$(VERSION)
 
 tag:
-	docker tag IMAGE_NAME:latest $(ECS_REPO_URL):$(VERSION)
+	docker tag IMAGE_NAME:latest $(IMAGE)
 
 push:
-	docker push $(ECS_REPO_URL):$(VERSION)
+	docker push $(IMAGE)
 
 pull:
-	docker pull $(ECS_REPO_URL):$(VERSION)
+	docker pull $(IMAGE)
 
 remove_image:
-	docker rmi $(ECS_REPO_URL):$(VERSION)
+	docker rmi $(IMAGE)
