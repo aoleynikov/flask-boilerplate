@@ -1,0 +1,26 @@
+---
+- hosts: webserver
+  vars:
+  - docker_image: "{{docker_image}}"
+  become: true
+  tasks:
+  - name: Create a dir
+    file:
+      path: /srv/example
+      state: directory
+  - name: Copy makefile
+    copy:
+      src: Makefile
+      dest: /srv/example/Makefile
+  - name: Pull the images
+    make:
+      chdir: /srv/example
+      file: Makefile
+      target: pull
+  - name: Launch
+    docker_container:
+      name: app
+      image: "{{ docker_image }}"
+      state: started
+      exposed_ports:
+      - 8000

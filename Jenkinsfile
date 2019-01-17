@@ -28,7 +28,8 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        echo 'Deploy will be launched from here'
+        image = '877366825671.dkr.ecr.us-east-1.amazonaws.com/storytelling-example:build_' + env.BUILD_NUMBER
+        sh "ansible-playbook -i deploy/group_vars/server -s deploy/deploy.yml --extra-vars='docker_image=:${image}'"
       }
     }
   }
