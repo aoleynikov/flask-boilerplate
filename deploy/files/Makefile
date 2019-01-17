@@ -37,7 +37,7 @@ IMAGE_NAME=storytelling-example
 IMAGE=$(APP_NAME):$(VERSION)
 
 tag:
-	docker tag IMAGE_NAME:latest $(IMAGE)
+	docker tag $(IMAGE_NAME):latest $(IMAGE)
 
 push:
 	docker push $(IMAGE)
