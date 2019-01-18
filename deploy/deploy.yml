@@ -24,5 +24,6 @@
       name: "{{version}}"
       image: "{{docker_image}}"
       restart_policy: on-failure
+      state: present
       exposed_ports:
       - 8000
