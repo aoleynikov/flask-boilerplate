@@ -21,11 +21,15 @@ pipeline {
         sh 'make test'
       }
     }
+    stage('Authenticate ECR') {
+      steps {
+        sh '$(aws ecr get-login --no-include-email --region us-east-1)'
+      }
+    }
     stage('Push image') {
       steps {
-        sh "\$(aws ecr get-login --no-include-email --region us-east-1)"
-        sh "make tag IMAGE=${image}"
-        sh "make push IMAGE=${image}"
+        sh "make tag ENV=${params.ENV}"
+        sh "make push ENV=${params.ENV}"
       }
     }
     stage('Deploy') {

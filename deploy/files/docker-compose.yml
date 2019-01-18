@@ -5,7 +5,7 @@ services:
       context: .
       args:
         - SECRET=${SECRET}
-    image: storytelling-example:latest
+    image: ${ENV}:latest
     container_name: web
     ports:
       - "8000:8000"
