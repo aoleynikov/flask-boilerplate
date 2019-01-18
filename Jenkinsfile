@@ -1,4 +1,4 @@
-def image = "877366825671.dkr.ecr.us-east-1.amazonaws.com/storytelling-example:${'build_' + env.BUILD_NUMBER}"
+def image = "877366825671.dkr.ecr.us-east-1.amazonaws.com/storytelling-example:${params.ENV + env.BUILD_NUMBER}"
 
 pipeline {
   agent any
