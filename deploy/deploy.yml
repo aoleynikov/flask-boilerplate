@@ -13,17 +13,23 @@
   - name: ECR docker login
     shell: "$(aws ecr get-login --no-include-email --region us-east-1)"
 
-  - name: Pull the image
+  - name: "Pulling {{version}} image"
     docker_image:
       pull: yes
       name: "{{docker_image}}"
 
-  - name: Launch
+  - name: Kill previous container if any
+    docker_container:
+      name: "{{version}}"
+      state: absent
+      force_kill: yes
+
+  - name: Launch container with new image
     docker_container:
       recreate: yes
       name: "{{version}}"
       image: "{{docker_image}}"
       restart_policy: on-failure
-      state: present
+      state: started
       exposed_ports:
       - 8000
