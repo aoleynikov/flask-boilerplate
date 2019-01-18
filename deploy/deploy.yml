@@ -18,8 +18,8 @@
       pull: yes
       name: "{{docker_image}}"
 
-  - name: Kill previous container if any
-    docker_container:
+    #name: Kill previous container if any
+  - docker_container:
       name: "{{version}}"
       state: absent
       force_kill: yes
