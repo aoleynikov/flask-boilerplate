@@ -44,6 +44,3 @@ push:
 
 pull:
 	docker pull $(IMAGE)
-
-remove_image:
-	docker rmi $(IMAGE)

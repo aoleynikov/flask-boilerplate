@@ -23,6 +23,6 @@
       recreate: yes
       name: "{{version}}"
       image: "{{docker_image}}"
-      state: started
+      restart_policy: on-failure
       exposed_ports:
       - 8000

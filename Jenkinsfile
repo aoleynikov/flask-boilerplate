@@ -42,7 +42,7 @@ pipeline {
     always {
       sh 'make stop'
       cleanWs()
-      sh "make remove_image ENV=${params.ENV}"
+      sh "docker rmi ${image}"
     }
   }
 }
