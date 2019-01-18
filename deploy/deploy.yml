@@ -1,29 +1,29 @@
 ---
 - hosts: webserver
   vars:
-  - docker_image: "{{ docker_image }}"
-  - version: "{{ version }}"
-  - aws_key: "{{ aws_key }}"
-  - aws_secret: "{{ aws_secret }}"
+  - docker_image: "{{docker_image}}"
+  - version: "{{version}}"
+  - aws_key: "{{aws_key}}"
+  - aws_secret: "{{aws_secret}}"
   environment:
-  - AWS_ACCESS_KEY_ID: "{{ aws_key }}"
-  - AWS_SECRET_ACCESS_KEY: "{{ aws_secret }}"
+  - AWS_ACCESS_KEY_ID: "{{aws_key}}"
+  - AWS_SECRET_ACCESS_KEY: "{{aws_secret}}"
   become: true
   tasks:
   - name: Kill previous version if any
     docker_container:
-      name: "{{ docker_image }}"
+      name: "{{docker_image}}"
       state: absent
   - name: ECR docker login
     shell: "$(aws ecr get-login --no-include-email --region us-east-1)"
   - name: Pull the image
     docker_image:
       pull: yes
-      name: "{{ docker_image }}"
+      name: "{{docker_image}}"
   - name: Launch
     docker_container:
-      name: "{{ version }}"
-      image: "{{ docker_image }}"
+      name: "{{version}}"
+      image: "{{docker_image}}"
       state: started
       exposed_ports:
       - 8000
