@@ -20,8 +20,9 @@
 
   - name: Launch
     docker_container:
+      recreate: yes
       name: "{{version}}"
       image: "{{docker_image}}"
-      state: started
+      state: present
       exposed_ports:
       - 8000
