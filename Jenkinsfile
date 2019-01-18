@@ -1,4 +1,4 @@
-def image = "877366825671.dkr.ecr.us-east-1.amazonaws.com/storytelling-example:${params.ENV + env.BUILD_NUMBER}"
+def image = "877366825671.dkr.ecr.us-east-1.amazonaws.com/storytelling-example:${params.ENV + '_' + env.BUILD_NUMBER}"
 
 pipeline {
   agent any
@@ -28,15 +28,15 @@ pipeline {
     }
     stage('Push image') {
       steps {
-        sh "make tag ENV=${params.ENV}"
-        sh "make push ENV=${params.ENV}"
+        sh "make tag IMAGE=${image}"
+        sh "make push IMAGE=${image}"
       }
     }
     stage('Deploy') {
       steps {
         withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID')]) {
           withCredentials([string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-            sh "ansible-playbook -i deploy/group_vars/${params.ENV} -s deploy/deploy.yml --extra-vars='docker_image=${image} version=${params.ENV} aws_key=$AWS_ACCESS_KEY_ID aws_secret=$AWS_SECRET_ACCESS_KEY'"
+            sh "ansible-playbook -i deploy/group_vars/${params.ENV} -s deploy/deploy.yml --extra-vars='docker_image=${image} version=${params.ENV} aws_key=${$AWS_ACCESS_KEY_ID} aws_secret=${$AWS_SECRET_ACCESS_KEY}'"
           }
         }
       }
