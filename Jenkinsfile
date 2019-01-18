@@ -31,7 +31,6 @@ pipeline {
     stage('Deploy') {
       steps {
         sh '''
-          set +x
           echo $AWS_ACCESS_KEY_ID
           echo $AWS_SECRET_ACCESS_KEY
           ansible-playbook -i deploy/group_vars/${params.ENV} -s deploy/deploy.yml --extra-vars='docker_image=${image} aws_key=${$AWS_ACCESS_KEY_ID} aws_secret=${AWS_SECRET_ACCESS_KEY}'
