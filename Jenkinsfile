@@ -36,7 +36,7 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID')]) {
           withCredentials([string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-            sh "ansible-playbook -i deploy/group_vars/${params.ENV} -s deploy/deploy.yml --extra-vars='docker_image=${image} version=${params.ENV} aws_key=${$AWS_ACCESS_KEY_ID} aws_secret=${$AWS_SECRET_ACCESS_KEY}'"
+            sh "ansible-playbook -i deploy/group_vars/${params.ENV} -s deploy/deploy.yml --extra-vars='docker_image=${image} version=${params.ENV} aws_key=$AWS_ACCESS_KEY_ID aws_secret=$AWS_SECRET_ACCESS_KEY'"
           }
         }
       }
