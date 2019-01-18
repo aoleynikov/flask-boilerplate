@@ -8,6 +8,8 @@
   environment:
   - AWS_ACCESS_KEY_ID: "{{aws_key}}"
   - AWS_SECRET_ACCESS_KEY: "{{aws_secret}}"
+  tags: 
+  - skip_ansible_lint 
   become: true
   tasks:
   - name: ECR docker login
