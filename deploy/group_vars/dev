@@ -1,2 +1,2 @@
 [webserver]
-54.166.153.254 ansible_user=ec2-user ansible_private_key_file=~/.ssh/STSTEC2NVirginia.pem
+54.166.153.254 ansible_remote_user=ec2-user ansible_private_key_file=~/.ssh/STSTEC2NVirginia.pem
