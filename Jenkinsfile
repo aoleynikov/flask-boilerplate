@@ -34,12 +34,15 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'ssh -i ~/.ssh/STSTEC2NVirginia.pem ec2-user@54.166.153.254 \'ls -la\''
-        // withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID')]) {
-        //   withCredentials([string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-        //     sh "ansible-playbook -i ./deploy/group_vars/${params.ENV} -s ./deploy/deploy.yml --extra-vars=\'docker_image=${image} version=${params.ENV} aws_key=$AWS_ACCESS_KEY_ID aws_secret=$AWS_SECRET_ACCESS_KEY\'"
-        //   }
-        // }
+        withCredentials(string[(credentialsId: 'DEPLOY_KEY', variable: 'DEPLOY_KEY')]) {
+          withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID')]) {
+            withCredentials([string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+              sh "echo $DEPLOY_KEY > ~/.ssh/STSTEC2NVirginia.pem"
+              sh "chmod 400 ~/.ssh/STSTEC2NVirginia.pem"
+              sh "ansible-playbook -i ./deploy/group_vars/${params.ENV} -s ./deploy/deploy.yml --extra-vars=\'docker_image=${image} version=${params.ENV} aws_key=$AWS_ACCESS_KEY_ID aws_secret=$AWS_SECRET_ACCESS_KEY\'"
+            }
+          }
+        }
       }
     }
   }
@@ -51,3 +54,5 @@ pipeline {
     }
   }
 }
+
+
