@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        withCredentials(string[(credentialsId: 'DEPLOY_KEY', variable: 'DEPLOY_KEY')]) {
+        withCredentials([string(credentialsId: 'DEPLOY_KEY', variable: 'DEPLOY_KEY')]) {
           withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID')]) {
             withCredentials([string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
               sh "echo $DEPLOY_KEY > ~/.ssh/STSTEC2NVirginia.pem"
